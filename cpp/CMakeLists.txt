@@ -87,11 +87,11 @@ else()
   message(STATUS "Add definition NDEBUG")
 endif()
 
+#Disable -Werror for AOCC
 set(KNOWN_WARNINGS
     "-Wall \
        -Wno-sign-compare \
        -Wno-comment \
-       -Werror \
        -Wno-error=parentheses \
        -Wno-error=unused-function \
        -Wno-error=unused-variable \
