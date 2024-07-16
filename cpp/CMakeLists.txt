@@ -39,6 +39,20 @@ set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/CMake" ${CMAKE_MODULE_PATH})
 set(CMAKE_EXPORT_COMPILE_COMMANDS
     ON
     CACHE INTERNAL "")
+# Include additional environment setup
+execute_process(COMMAND /bin/bash -c "source /opt/AMD/aocc-compiler-4.2.0/setenv_AOCC.sh" OUTPUT_VARIABLE _output)
+
+# Set the C and C++ compilers
+set(CMAKE_C_COMPILER /opt/AMD/aocc-compiler-4.2.0/bin/clang)
+set(CMAKE_CXX_COMPILER /opt/AMD/aocc-compiler-4.2.0/bin/clang++)
+
+# Set the C and C++ flags
+set(CMAKE_C_FLAGS "-zopt -O3 -march=znver4" CACHE STRING "C Compiler Flags")
+set(CMAKE_CXX_FLAGS "-zopt -O3 -march=znver4" CACHE STRING "C++ Compiler Flags")
+
+# Set the linker flags
+set(CMAKE_EXE_LINKER_FLAGS "-fuse-ld=lld" CACHE STRING "Linker Flags")
+set(CMAKE_SHARED_LINKER_FLAGS "-fuse-ld=lld" CACHE STRING "Shared Linker Flags")
 
 project(gluten)
 
